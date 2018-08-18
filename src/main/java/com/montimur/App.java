@@ -15,7 +15,7 @@ public class App
     public static void main(String...args) {
 
         if (args.length <= 0 || args[0] == null || args[0].isEmpty()) {
-            System.out.println("No string provided.");
+            throw new IllegalArgumentException("A non-null, non-empty, string must be provided.");
         } else {
             StringProcessor.getBuilder()
                     .setMessageFunction(MESSAGE_FUNC)
