@@ -15,8 +15,6 @@ final class CharSumProcessor implements StringProcessor {
 
     private static final Pattern INTEGER_PATTERN = Pattern.compile("^(-?\\d+)\\D+?(-?\\d+)$");
 
-
-
     private static final Predicate<String> NOT_EMPTY = ((Predicate<String>) String::isEmpty).negate();
 
     private final int sum, charCount;

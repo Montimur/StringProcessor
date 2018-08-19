@@ -2,25 +2,27 @@ package com.montimur;
 
 import com.montimur.processor.StringProcessor;
 
+import java.util.Optional;
 import java.util.function.Function;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     private static final Function<Boolean, String> MESSAGE_FUNC = bool -> String.format("\t=> %s", String.valueOf(bool));
 
     public static void main(String...args) {
+        var input = Optional.ofNullable(args)
+                .filter(arr -> arr.length >= 1)
+                .map(arr -> arr[0]);
 
-        if (args.length <= 0 || args[0] == null || args[0].isEmpty()) {
-            throw new IllegalArgumentException("A non-null, non-empty, string must be provided.");
-        } else {
+        if (input.isPresent()) {
             StringProcessor.getBuilder()
                     .setMessageFunction(MESSAGE_FUNC)
                     .buildProcessor()
-                    .process(args[0]);
+                    .process(input.get());
+        } else {
+            System.out.println(
+                    "Invalid Parameter: A non-empty string must be provided!"
+            );
         }
     }
 }
